@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+
+</style>
+{% block content %}
+    <h2 class="px-3 pb-2 text-light ">Your Folders</h2>
+    
+    <table class="table table-bordered table-striped " >
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Modified at</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for folder in all_folders %}
+            <tr>
+                
+                <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="blue" class="bi bi-folder-fill" viewBox="0 0 16 16">
+                        <path d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3m-8.322.12q.322-.119.684-.12h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981z"/>
+                      </svg>
+                      <a href="{% url 'filesview' folder.name %}" class="text-decoration-none link-dark ">{{ folder.name }} </a></td>
+                <td>{{ folder.owner.username }} </td>
+                <td>{{ folder.last_modified }} </td>
+                <td> 
+                    <a href="{% url 'delete_folder' folder.id %}" class="btn btn-danger" >Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
